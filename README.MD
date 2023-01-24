@@ -5,12 +5,12 @@
 
 ---
 
-## Computer Science Roadmap
+## 1. Computer Science Roadmap
 
 Thanks to roadmap.sh  and Kamran Ahmed for providing this and more amazing roadmaps. 
 You can access the complete roadmap at the link: [🔗 Computer Science](https://roadmap.sh/computer-science)
 
-## Pick a Language
+## 2. Pick a Language
 
 I decided to use C to study most of the concepts in this roadmap, if a need a OOP language, I will use C++. I was convinced by the information contained in the roadmap:
 
