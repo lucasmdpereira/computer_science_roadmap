@@ -1,0 +1,792 @@
+# Sumário
+
+1. [What is C?](#computer-science-roadmap)
+2. [myfirstprogram.c]
+
+---
+
+## 1. What is C?
+
+- C is a general-purpose programming language created by Dennis Ritchie at the Bell Laboratories in 1972;
+- It is one of the most popular programming language in the world;
+- If you know C, you will have no problem learning other popular programming languages such as Java, Python, C++, C#, etc, as the syntax is similar;
+- C is very fast, compared to other programming languages, like Java and Python;
+- C is very versatile; it can be used in both applications and technologies;
+- C++ was developed as an extension of C, and both languages have almost the same syntax;
+- The main difference between C and C++ is that C++ support classes and objects, while C does not;
+
+### 1.1. myfirstprogram.c
+
+[🤓 myfirstprogram.c](./code/myfirstprogram.c)
+
+## 2. Syntax
+
+- To insert a new line, you can use the \n character.
+- Two \n characters after each other will create a blank line.
+- Single-line comments start with two forward slashes (//).
+- Multi-line comments start with /* and ends with */.
+
+```c
+#include <stdio.h> // header file library that lets us work with input and output functions, such as printf() (used in line 4). Header files add functionality to C programs.
+
+void main(){ // Another thing that always appear in a C program, is main(). This is called a function. Any code inside its curly brackets {} will be executed. 
+    printf("Hello World!\n"); // is a function used to output/print text to the screen. In our example it will output "Hello World".
+}
+```
+
+## 3. Variables
+
+In C, there are different types of variables (defined with different keywords), for example:
+
+- ```int``` => stores integers (whole numbers), without decimals, such as 123 or - 123
+- ```float``` => stores floating point numbers, with decimals, such as 19.99 or -19.99
+- ```char``` => stores single characters, such as 'a' or 'B'. Char values are surrounded by single quotes
+
+To create a variable, specify the type and assign it a value:
+
+```c
+int myNum = 15;
+```
+You can also declare a variable without assigning the value, and assign the value later.
+
+## 4. Output
+
+In many other programming languages (like Python, Java, and C++), you would normally use a print function to display the value of a variable. However, this is not possible in C:
+
+```c
+int myNum = 15;
+printf(myNum);  // Nothing happens
+```
+
+## 4.1. Format Specifiers
+
+It is basically a placeholder for the variable value.
+
+A format specifier starts with a percentage sign ```%```, followed by a character.
+
+For example, to output the value of an int variable, you must use the format specifier ```%d``` or ```%i``` surrounded by double quotes, inside the printf() function.
+
+To print other types, use ```%c``` for char and ```%f``` for float.
+
+```c
+// Create variables
+#include <stdio.h>
+
+void main(){
+    // Create variables
+    int myNum = 15;            // Integer (whole number)
+    float myFloatNum = 5.99;   // Floating point number
+    char myLetter = 'D';       // Character
+
+    // Print variables
+    printf("%d\n", myNum);
+    printf("%f\n", myFloatNum);
+    printf("%c\n", myLetter);
+
+    printf("My number is %d and my letter is %c\n", myNum, myLetter);
+}
+```
+
+## 5. Data Types
+
+Variable in C must be a specified data type, and you must use a format specifier inside the printf() function to display it.
+
+### 5.1. Basic Data Types
+
+| Data Type | Size | Description |
+|-----------|------|-------------|
+| ```int``` | 2 or 4 bytes | Stores whole numbers, without decimals |
+| ```float``` | 4 bytes | Stores fractional numbers, containing one or more decimals. Sufficient for storing 6-7 decimal digits |
+| ```double``` | 8 bytes | Stores fractional numbers, containing one or more decimals. Sufficient for storing 15 decimal digits |
+| ```char``` | 1 byte | Stores a single character/letter/number, or ASCII values |
+
+### 5.2. Basic Format Specifiers
+
+| Format Specifier | Data Type |
+|------------------|-----------|
+| ```%d``` or ```%i``` | ```int``` |
+| ```%f``` | ```float``` |
+| ```%lf``` | ```double``` |
+| ```%c``` | ```char``` |
+| ```%s``` | Used for strings (text), which you will learn more about in a later chapter |
+
+### 5.3. Set Decimal Precision
+
+If you print a floating point number, the output will show many digits after the decimal point.
+
+```c
+#include <stdio.h>
+
+void main(){
+    float myFloatNum = 3.5;
+    double myDoubleNum = 19.99;
+
+    printf("%f\n", myFloatNum); // Outputs 3.500000
+    printf("%lf\n", myDoubleNum); // Outputs 19.990000
+
+    // If you want to remove the extra zeros (set decimal precision), you can use a dot (.) followed by a number that specifies how many digits that should be shown after the decimal point:
+
+    printf("%f\n", myFloatNum); // Default will show 6 digits after the decimal point
+    printf("%.1f\n", myFloatNum); // Only show 1 digit
+    printf("%.2f\n", myFloatNum); // Only show 2 digits
+    printf("%.4f\n", myFloatNum);   // Only show 4 digits
+}
+```
+
+## 6. Type Conversion
+
+If you try to divide two integers, 5 by 2, you would expect the result to be 2.5. But since we are working with integers (and not floating-point values), the following example will just output 2. 
+```c
+#include <stdio.h>
+
+void main(){
+    int x = 5;
+    int y = 2;
+    int sum = 5 / 2;
+
+    printf("%d\n", sum); // Outputs 2
+}
+```
+To get the right result, you need to know how type conversion works.
+
+There are two types of conversion in C:
+
+Implicit Conversion (automatically)
+Explicit Conversion (manually)
+
+### 6.1. Implicit Conversion
+
+Implicit conversion is done automatically by the compiler when you assign a value of one type to another.
+
+For example, if you assign an ```int``` value to a ```float``` type:
+
+```c
+#include <stdio.h>
+
+void main(){
+    // Automatic conversion: int to float
+    float myFloat = 9;
+
+    printf("%f\n", myFloat); // 9.000000
+}
+```
+This can be risky, as you might lose control over specific values in certain situations.
+
+Especially if it was the other way around - the following example automatically converts the float value 9.99 to an int value of 9:
+
+```c
+#include <stdio.h>
+
+void main(){
+    // Automatic conversion: int to float
+    float myInt = 9.99;
+
+    printf("%f\n", myInt); // 9
+}
+```
+
+### 6.2. Explicit Conversion
+
+Explicit conversion is done manually by placing the type in parentheses ```()``` in front of the value.
+
+```c
+#include <stdio.h>
+
+void main(){
+    // Manual conversion: int to float
+    float sum = (float) 5 / 2;
+
+    printf("%.1f\n", sum); // 2.5
+
+    int num1 = 5;
+    int num2 = 2;
+    float sum2 = (float) num1 / num2;
+
+    printf("%.1f\n", sum2); // 2.5
+}
+```
+
+## 7. Constants
+
+Use the ```const``` keyword it is considered good practice to declare them with uppercase.
+
+```c
+    const int BIRTHYEAR = 1980;
+```
+
+## 8. Operators
+
+C divides the operators into the following groups:
+
+- Arithmetic operators
+- Assignment operators
+- Comparison operators
+- Logical operators
+- Bitwise operators
+
+|Operator|Name|Description|Example|
+|--------|----|-----------|-------|
+|```+``` |Addition|Adds together two values|x + y|
+|```-``` |Substraction|Subtracts one value from another|x - y|
+|```*``` |Multiplication|Multiplies two values|x * y|
+|```/``` |Division|Divides one value by another|x / y|
+|```%``` |Modulus|Returns the division remainder|x % y|
+|```++```|Increment|Increases the value of a variable by 1|++x|
+|```--```|Decrement|Decreases the value of a variable by 1|--x|
+
+### 8.1. Assignment Operators
+
+A list of all assignment operators:
+
+|Operator|Example|Same As|
+|--------|-------|-------|
+|```=``` |```x = 5``` |```x = 5``` |
+|```+=``` |```x += 3``` |```x = x + 3``` |
+|```-=``` |```x -= 3``` |```x = x - 3``` |
+|```*=``` |```x *= 3``` |```x = x * 3``` |
+|```/=``` |```x /= 3``` |```x = x / 3``` |
+|```%=``` |```x %= 3``` |```x = x % 3``` |
+|```&=``` |```x &= 3``` |```x = x & 3``` |
+|```\|=```|```x \|= 3```|```x = x \| 3```|
+|```^=``` |```x ^= 3``` |```x = x ^ 3``` |
+|```>>=```|```x >>= 3```|```x = x >> 3```|
+|```<<=```|```x <<= 3```|```x = x << 3```|
+
+### 8.2. Comparison Operators
+
+The return value of a comparison is either ```1``` or ```0```, which means ```true``` (```1```) or ```false``` (```0```).
+
+|Operator|Name|Example|
+|--------|-------|-------|
+|```==```|Equal to|```x == y```|
+|```!=```|Not equal|```x != y```|
+|```>```|Greater than|```x > y```|
+|```<```|Less than|```x < y```|
+|```>=```|Greater than or equal to|```x >= y```|
+|```<=```|Less than or equal to|```x <= y```|
+
+### 8.3. Logical Operators
+
+You can also test for true or false values with logical operators.
+
+|Operator|Name|Description|Example|
+|--------|----|-----------|-------|
+|```&&```|Logical and|Returns true if both statements are true|```x < 5 && x < 10```|
+|```\|\|```|Not equal|Returns true if one of the statements is true|```x < 5 \|\| x < 4```|
+|```!```|Greater than|Reverse the result, returns false if the result is true|```!(x < 5 && x < 10)```|
+
+### 8.4. Sizeof Operator
+
+The memory size (in bytes) of a data type or a variable can be found with the ```sizeof``` operator. Note that we use the ```%lu``` format specifer to print the result, instead of ```%d```. It is because the compiler expects the sizeof operator to return a long unsigned int (```%lu```), instead of int (```%d```).
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myInt;
+    float myFloat;
+    double myDouble;
+    char myChar;
+
+    printf("%lu\n", sizeof(myInt));
+    printf("%lu\n", sizeof(myFloat));
+    printf("%lu\n", sizeof(myDouble));
+    printf("%lu\n", sizeof(myChar));
+}
+```
+
+## 9. Booleans
+
+In C, the bool type is not a built-in data type, like ```int``` or ```char```.
+
+It was introduced in C99, and you must import the following header file to use it.
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+
+void main(){
+    // Create boolean variables
+    bool isProgrammingFun = true;
+    bool isFishTasty = false;
+
+    // Return boolean values
+    printf("%d\n", isProgrammingFun);   // Returns 1 (true)
+    printf("%d\n", isFishTasty);        // Returns 0 (false)
+}
+```
+
+## 10. Conditions and If Statements
+
+C has the following conditional statements:
+
+- Use ```if``` to specify a block of code to be executed, if a specified condition is ```true```;
+- Use ```else``` to specify a block of code to be executed, if the same condition is ```false```;
+- Use ```else``` if to specify a new condition to test, if the first condition is ```false```;
+- Use ```switch``` to specify many alternative blocks of code to be executed;
+
+```c
+#include <stdio.h>
+
+void main(){
+    int time = 22;
+    if (time < 10) {
+    printf("Good morning.");
+    } else if (time < 20) {
+    printf("Good day.");
+    } else {
+    printf("Good evening.");
+    }
+    // Outputs "Good evening."
+}
+```
+## 10.1. Short Hand If...Else (Ternary Operator)
+
+Syntax:
+```c
+// variable = (condition) ? expressionTrue : expressionFalse;
+```
+
+```c
+#include <stdio.h>
+
+void main(){
+    int time = 20;
+    (time < 18) ? printf("Good day.") : printf("Good evening.");
+}
+```
+
+## 11. Switch Statement
+
+Instead of writing many ```if..else``` statements, you can use the ```switch``` statement.
+
+When C reaches a ```break``` keyword, it breaks out of the switch block. A break can save a lot of execution time because it "ignores" the execution of all the rest of the code in the switch block.
+
+```c
+int day = 4;
+
+switch (day) {
+  case 1:
+    printf("Monday");
+    break;
+  case 2:
+    printf("Tuesday");
+    break;
+  case 3:
+    printf("Wednesday");
+    break;
+  case 4:
+    printf("Thursday");
+    break;
+  case 5:
+    printf("Friday");
+    break;
+  case 6:
+    printf("Saturday");
+    break;
+  case 7:
+    printf("Sunday");
+    break;  
+  default:
+    printf("Invalid day");
+}
+```
+
+## 12. Loops
+
+### 12.1. While Loop
+
+The ```while``` loop loops through a block of code as long as a specified condition is ```true```:
+
+```c
+    int i = 0;
+
+    while (i < 5) {
+        printf("%d\n", i);
+        i++;
+    }
+```
+
+### 12.2. The Do/While Loop
+
+The ```do/while``` loop is a variant of the ```while``` loop. This loop will execute the code block once, before checking if the condition is true, then it will repeat the loop as long as the condition is true.
+
+```c
+    int i = 0;
+
+    do {
+        printf("%d\n", i);
+        i++;
+    }
+    while (i < 5);
+```
+
+### 12.3. For Loop
+
+When you know exactly how many times you want to loop through a block of code, use the ```for``` loop instead of a ```while``` loop.
+
+```c
+    int i;
+
+    for (i = 0; i < 5; i++) {
+        printf("%d\n", i);
+    }
+```
+
+### 12.3.1   Break and Continue in a for loop
+
+You can use ```break``` and ```continue``` inside a ```for``` loop.
+
+```c
+for (int i = 0; i < 10; i++) {
+    if (i < 9) {
+        continue;
+    }
+    if (i == 9) {
+        break;
+    }
+}
+```
+
+## 13. Arrays
+
+To create an array, define the data type (like ```int```) and specify the name of the array followed by **square brackets []**.
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myNumbers[] = {25, 50, 75, 100};
+    printf("%d", myNumbers[0]);
+}
+```
+
+### 13.1. Change an Array Element
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myNumbers[] = {25, 50, 75, 100};
+    myNumbers[0] = 33;
+
+    printf("%d", myNumbers[0]);
+}
+```
+
+### 13.2. Loop Through an Array
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myNumbers[] = {25, 50, 75, 100};
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        printf("%d\n", myNumbers[i]);
+    }
+}
+```
+
+### 13.3. Set Array Size
+
+```c
+#include <stdio.h>
+
+void main(){
+    // Declare an array of four integers:
+    int myNumbers[4];
+
+    // Add elements
+    myNumbers[0] = 25;
+    myNumbers[1] = 50;
+    myNumbers[2] = 75;
+    myNumbers[3] = 100;
+}
+```
+
+### 13.4 Multidimensional Arrays
+
+A multidimensional array is basically a matrix, an array of arrays.
+
+```c
+#include <stdio.h>
+
+void main(){
+    int matrix[2][3] = { {1, 4, 2}, {3, 6, 8} };
+    
+    printf("%d", matrix[0][2]);  // Outputs 2
+}
+```
+
+#### 13.4.1. Loop Through a 2D Array
+
+```c
+#include <stdio.h>
+
+void main(){
+    int matrix[2][3] = { {1, 4, 2}, {3, 6, 8} };
+
+    int i, j;
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("%d\n", matrix[i][j]);
+        }
+    }
+}
+```
+
+## 14. Strings
+
+Unlike many other programming languages, C does not have a String type to easily create string variables. Instead, you must use the ```char``` type and create an array of characters to make a string in C:
+
+```c
+#include <stdio.h>
+
+void main(){
+    char greetings[] = "Hello World!";
+    
+    printf("%s", greetings);
+}
+```
+
+### 14.1. Access Strings
+
+Since strings are actually arrays in C, you can access a string by referring to its index number inside square brackets ```[]```.
+
+```c
+#include <stdio.h>
+
+void main(){
+    char greetings[] = "Hello World!";
+    
+    printf("%c", greetings[0]);
+}
+```
+
+### 14.2. Another Way Of Creating Strings and Differences
+
+You should also note that you can create a string with a set of characters. This example will produce the same result as the example above.
+
+**Why do we include the ```\0``` character at the end? This is known as the "null terminating character", and must be included when creating strings using this method. It tells C that this is the end of the string.**
+
+```c
+#include <stdio.h>
+
+void main(){
+    char greetings[] = {'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\0'};
+    char greetings2[] = "Hello World!";
+
+    printf("%lu\n", sizeof(greetings));   // Outputs 13
+    printf("%lu\n", sizeof(greetings2));  // Outputs 13
+}
+```
+
+### 14.3. String Functions
+
+To use them, you must include the ```<string.h>``` header file in your program.
+
+#### 14.3.1. String Length
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void main(){
+    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    printf("%lu", strlen(alphabet));
+}
+```
+
+#### 14.3.2. Size of 
+
+We used sizeof to get the size of a string/array. Note that ```sizeof``` and ```strlen``` behaves differently, as sizeof also includes the ```\0``` character when counting:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void main(){
+    char alphabet[50] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    printf("%d", strlen(alphabet));   // 26
+    printf("%d", sizeof(alphabet));   // 50
+}
+```
+
+#### 14.3.3. Concatenate Strings
+
+Use the strcat() function:
+
+```c
+char str1[20] = "Hello ";
+char str2[] = "World!";
+
+// Concatenate str2 to str1 (result is stored in str1)
+strcat(str1, str2);
+
+// Print str1
+printf("%s", str1);
+```
+
+#### 14.3.4. Copy Strings
+
+Use the strcpy() function:
+
+```c
+char str1[20] = "Hello World!";
+char str2[20];
+
+// Copy str1 to str2
+strcpy(str2, str1);
+
+// Print str2
+printf("%s", str2);
+```
+
+#### 14.3.5. Compare Strings
+
+Use the ```strcmp()``` function:
+
+```c
+char str1[] = "Hello";
+char str2[] = "Hello";
+char str3[] = "Hi";
+
+// Compare str1 and str2, and print the result
+printf("%d\n", strcmp(str1, str2));  // Returns 0 (the strings are equal)
+
+// Compare str1 and str3, and print the result
+printf("%d\n", strcmp(str1, str3));  // Returns -4 (the strings are not equal)
+```
+
+### 15. User Input
+
+To get user input, you can use the ```scanf()``` function.
+
+The ```scanf()``` function takes two arguments: the format specifier of the variable (```%d``` in the example above) and the reference operator (```&myNum```), which stores the memory address of the variable.
+
+```c
+#include <stdio.h>
+
+void main(){
+    // Create an integer variable that will store the number we get from the user
+    int myNum;
+
+    // Ask the user to type a number
+    printf("Type a number: \n");
+
+    // Get and save the number the user types
+    scanf("%d", &myNum);
+
+    // Output the number the user typed
+    printf("Your number is: %d\n", myNum);
+}
+```
+
+### 15.1. Take String Input
+
+The ```scanf()``` function has some limitations: it considers space (whitespace, tabs, etc) as a terminating character, which means that it can only display a single word (even if you type many words).
+
+```c
+#include <stdio.h>
+
+void main(){
+    // Create a string
+    char firstName[30];
+
+    // Ask the user to input some text
+    printf("Enter your first name: \n");
+
+    // Get and save the text
+    scanf("%s", firstName);
+
+    // Output the text
+    printf("Hello %s\n", firstName);
+}
+```
+
+### 15.2. Read a line of text
+
+```c
+#include <stdio.h>
+
+void main(){
+    char fullName[30];
+
+    printf("Type your full name: \n");
+    fgets(fullName, sizeof(fullName), stdin);
+
+    printf("Hello %s", fullName);
+
+    // Type your full name: John Doe
+    // Hello John Doe
+}
+```
+
+## 16. Memory Address
+
+When a variable is created in C, a memory address is assigned to the variable.To access it, use the reference operator (```&```), and the result represents where the variable is stored:
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myAge = 43;
+    printf("%p\n", &myAge); // Outputs 0x7ffe5367e044
+}
+```
+
+You should also note that ```&myAge``` is often called a "pointer". A pointer basically stores the memory address of a variable as its value. To print pointer values, we use the ```%p``` format specifier.
+
+## 17. Pointers
+
+We can get the memory address of a variable with the reference operator ```&```.
+
+### 17.1. Reference - Creating Pointers
+
+A pointer is a variable that stores the memory address of another variable as its value. A pointer variable points to a data type (like ```S```) of the same type, and is created with the ```*``` operator.
+
+The address of the variable you are working with is assigned to the pointer:
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myAge = 43;     // An int variable
+    int* ptr = &myAge;  // A pointer variable, with the name ptr, that stores the address of myAge
+
+    // Output the value of myAge (43)
+    printf("%d\n", myAge);
+
+    // Output the memory address of myAge (0x7ffe5367e044)
+    printf("%p\n", &myAge);
+
+    // Output the memory address of myAge with the pointer (0x7ffe5367e044)
+    printf("%p\n", ptr);
+}
+```
+
+### 17.2. Dereference -  get the value of the variable the pointer points to
+
+In the example above, we used the pointer variable to get the memory address of a variable (used together with the ```&``` reference operator).
+
+You can also get the value of the variable the pointer points to, by using the ```*``` operator (the dereference operator):
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myAge = 43;     // Variable declaration
+    int* ptr = &myAge;  // Pointer declaration
+
+    // Reference: Output the memory address of myAge with the pointer (0x7ffe5367e044)
+    printf("%p\n", ptr);
+
+    // Dereference: Output the value of myAge with the pointer (43)
+    printf("%d\n", *ptr);
+}
+```
+
+## 18. Pointers and Arrays
+
