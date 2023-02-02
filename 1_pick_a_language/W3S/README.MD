@@ -1,7 +1,76 @@
+![](/1_pick_a_language/W3S/pick_a_language.png)
+
 # Sumário
 
 1. [What is C?](#computer-science-roadmap)
-2. [myfirstprogram.c]
+  1.1. [myfirstprogram.c](#11-myfirstprogramc)
+2. [Syntax](#2-syntax)
+3. [Variables](#3-variables)
+4. [Output](#4-output)
+  4.1. [Format Specifiers](#41-format-specifiers)
+5. [Data Types](#5-data-types)  
+  5.1. [Basic Data Types](#51-basic-data-types)  
+  5.2. [Basic Format Specifiers](#52-basic-format-specifiers)  
+  5.3. [Set Decimal Precision](#53-set-decimal-precision)
+6. [Type Conversion](#6-type-conversion)  
+  6.1. [Implicit Conversion](#61-implicit-conversion)  
+  6.2. [Explicit Conversion](#62-explicit-conversion)  
+7. [Constants](#7-constants) 
+8. [Operators](#8-operators)  
+  8.1. [Assignment Operators](#81-assignment-operators)  
+  8.2. [Comparison Operators](#82-comparison-operators)  
+  8.3. [Logical Operators](#83-logical-operators)  
+  8.4. [Sizeof Operator](#84-sizeof-operator)
+9. [Booleans](#9-booleans)
+10. [Conditions and If Statements](#10-conditions-and-if-statements)  
+  10.1. [Short Hand If...Else (Ternary Operator)](#101-short-hand-ifelse-ternary-operator)  
+11. [Switch Statement](#11-switch-statement)   
+12. [Loops](#12-loops)  
+  12.1. [While Loop](#121-while-loop)  
+  12.2. [The Do/While Loop](#122-the-dowhile-loop)   
+  12.3. [For Loop](#123-for-loop)  
+  &nbsp;&nbsp;&nbsp;12.3.1. [Break and Continue in a for loop](#1231-break-and-continue-in-a-for-loop)  
+13. [Arrays](#13-arrays)  
+  13.1. [Change an Array Element](#131-change-an-array-element)  
+  13.2. [Loop Through an Array](#132-loop-through-an-array)  
+  13.3. [Set Array Size](#133-set-array-size)  
+  13.4. [Multidimensional Arrays](#134-multidimensional-arrays)  
+  &nbsp;&nbsp;&nbsp;13.4.1. [Loop Through a 2D Array](#1341-loop-through-a-2d-array)  
+14. [Strings](#14-strings)  
+  14.1. [Access Strings](#141-access-strings)  
+  14.2. [Another Way Of Creating Strings and Differences](#142-another-way-of-creating-strings-and-differences)  
+  14.3. [String Functions](#143-string-functions)  
+  &nbsp;&nbsp;&nbsp;14.3.1. [String Length](#1431-string-length)  
+  &nbsp;&nbsp;&nbsp;14.3.2. [Size of ](#1432-size-of)  
+  &nbsp;&nbsp;&nbsp;14.3.3. [Concatenate Strings](#1433-concatenate-strings)  
+  &nbsp;&nbsp;&nbsp;14.3.4. [Copy Strings](#1434-copy-strings)  
+  &nbsp;&nbsp;&nbsp;14.3.5. [Compare Strings](#1435-compare-strings)  
+15. [User Input](#15-user-input)  
+  15.1. [Take String Input](#151-take-string-input)  
+  15.2. [Read a line of text](#152-read-a-line-of-text)  
+16. [Memory Address](#16-memory-address)  
+17. [Pointers](#17-pointers)  
+  17.1. [Reference - Creating Pointers](#171-reference---creating-pointers)  
+  17.2. [Dereference -  get the value of the variable the pointer points to](#172-dereference---get-the-value-of-the-variable-the-pointer-points-to)  
+  17.3. [Pointers and Arrays](#173-pointers-and-arrays)  
+18. [Functions](#18-functions)  
+  18.1. [Create a Function](#181-create-a-function)  
+  18.2. [Call a Function](#182-call-a-function)  
+  18.3. [Function Parameters](#183-function-parameters)  
+  18.4. [Recursion](#184-recursion)  
+  18.5. [Math Functions](#185-math-functions)  
+19. [Files](#19-files)  
+  19.1. [File Handling](#191-file-handling)  
+  19.2. [Write To a File](#192-write-to-a-file)  
+  19.3. [Append Content To a File](#193-append-content-to-a-file)  
+  19.4. [Read a File](#194-read-a-file)  
+  19.5. [The fgets() function](#195-the-fgets-function)  
+20. [Structures (structs)](#20-structures-structs)  
+  20.1. [Acces Structure](#201-acces-structure)  
+  20.2. [Strings in Structures](#202-strings-in-structures)  
+  20.3. [Simpler Syntax](#203-simpler-syntax)  
+  20.4. [Real Life Example](#204-real-life-example)  
+21. [Enumeration (enum)](#21-enumeration-enum)  
 
 ---
 
@@ -788,5 +857,399 @@ void main(){
 }
 ```
 
-## 18. Pointers and Arrays
+## 17.3. Pointers and Arrays
 
+You can also use pointers to access arrays.
+The memory address of the first element is the same as the name of the array:
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myNumbers[4] = {25, 50, 75, 100};
+
+    // Get the memory address of the myNumbers array
+    printf("%p\n", myNumbers); // 0x7ffe70f9d8f0
+
+    // Get the memory address of the first array element
+    printf("%p\n", &myNumbers[0]); // 0x7ffe70f9d8f0
+}
+```
+
+myNumbers is a pointer to the first element in myNumbers, you can use the * operator to access it, or loop through it:
+
+```c
+#include <stdio.h>
+
+void main(){
+    int myNumbers[4] = {25, 50, 75, 100};
+    int *ptr = myNumbers;
+    int i;
+
+    for (i = 0; i < 4; i++) {
+    printf("%d\n", *(ptr + i));
+    // 25
+    // 50
+    // 75
+    // 100
+    }
+}
+```
+
+## 18. Functions
+
+### 18.1 Create a Function
+
+To create (often referred to as declare) your own function, specify the name of the function, followed by parentheses ```()``` and curly brackets ```{}```:
+
+```c
+void myFunction() {
+  // code to be executed
+}
+```
+
+```void``` means that the function does not have a return value. You will learn more about return values later in the next chapter
+
+### 18.2 Call a Function
+
+To call a function, write the function's name followed by two parentheses ```()``` and a semicolon ```;```
+
+```c
+// Create a function
+void myFunction() {
+  printf("I just got executed!");
+}
+
+int main() {
+  myFunction(); // call the function
+  return 0;
+}
+
+// Outputs "I just got executed!"
+```
+
+### 18.3. Function Parameters
+
+Information can be passed to functions as a parameter. Parameters act as variables inside the function.
+Inside the function, you can add as many parameters as you want:
+
+```c
+void myFunction(char name[], int age) {
+  printf("Hello %s. You are %d years old.\n", name, age);
+}
+
+int main() {
+  myFunction("Liam", 3);
+  myFunction("Jenny", 14);
+  myFunction("Anja", 30);
+  return 0;
+}
+
+// Hello Liam. You are 3 years old.
+// Hello Jenny. You are 14 years old.
+// Hello Anja. You are 30 years old.
+```
+
+### 18.4. Recursion
+
+Recursion is the technique of making a function call itself. This technique provides a way to break complicated problems down into simple problems which are easier to solve.
+
+```c
+int sum(int k);
+
+int main() {
+  int result = sum(10);
+  printf("%d", result);
+  return 0;
+}
+
+int sum(int k) {
+  if (k > 0) {
+    return k + sum(k - 1);
+  } else {
+    return 0;
+  }
+}
+```
+
+The developer should be very careful with recursion as it can be quite easy to slip into writing a function which never terminates, or one that uses excess amounts of memory or processor power. However, when written correctly recursion can be a very efficient and mathematically-elegant approach to programming.
+
+
+### 18.5 Math Functions
+
+```c
+#include <math.h>
+```
+
+|Function|Description|
+|--------|-----------|
+|```abs```|Returns the absolute value of x|
+|```acos(x)```|Returns the arccosine of x|
+|```asin(x)```|Returns the arcsine of x|
+|```atan(x)```|Returns the arctangent of x|
+|```cbrt(x)```|Returns the cube root of x|
+|```cos(x)```|Returns the cosine of x|
+|```exp(x)```|Returns the value of Ex|
+|```sin(x)```|Returns the sine of x (x is in radians)|
+|```tan(x)```|Returns the tangent of an angle|
+
+## 19. Files
+
+### 19.1. File Handling
+
+In C, you can create, open, read, and write to files by declaring a pointer of type ```FILE```, and use the ```fopen()``` function:
+
+```c
+FILE *fptr
+fptr = fopen(filename, mode);
+```
+
+```FILE``` is basically a data type, and we need to create a pointer variable to work with it (fptr). For now, this line is not important. It's just something you need when working with files.
+
+To actually open a file, use the ```fopen()``` function, which takes two parameters:
+|Parameter|Description|
+|---|---|
+|filename|The name of the actual file you want to open (or create), like ```filename.txt```|
+|mode|	A single character, which represents what you want to do with the file (read, write or append): ```w``` - Writes to a file; ```a``` - Appends new data to a file; ```r``` - Reads from a file|
+
+```c
+#include <stdio.h>
+
+void main(){
+    FILE *fptr;
+
+    // Create a file
+    fptr = fopen("filename.txt", "w");
+
+    // Close the file
+    fclose(fptr);
+}
+```
+
+### 19.2. Write To a File
+
+Let's use the ```w``` mode from the previous chapter again, and write something to the file we just created.
+
+The ```w``` mode means that the file is opened for writing. To insert content to it, you can use the ```fprint()``` function and add the pointer variable (```fptr``` in our example) and some text:
+
+```c
+FILE *fptr;
+
+// Open a file in writing mode
+fptr = fopen("filename.txt", "w");
+
+// Write some text to the file
+fprintf(fptr, "Some text");
+
+// Close the file
+fclose(fptr);
+```
+
+**Note: If you write to a file that already exists, the old content is deleted, and the new content is inserted. This is important to know, as you might accidentally erase existing content.**
+
+### 19.3. Append Content To a File
+
+If you want to add content to a file without deleting the old content, you can use the ```a``` mode.
+
+```c
+FILE *fptr;
+
+// Open a file in append mode
+fptr = fopen("filename.txt", "a");
+
+// Append some text to the file
+fprintf(fptr, "\nHi everybody!");
+
+// Close the file
+fclose(fptr);
+```
+
+**Note: Just like with the w mode; if the file does not exist, the a mode will create a new file with the "appended" content.**
+
+### 19.4. Read a File
+
+To read from a file, you can use the ```r``` mode:
+
+```c
+FILE *fptr;
+
+// Open a file in read mode
+fptr = fopen("filename.txt", "r");
+```
+
+This will make the filename.txt opened for reading.
+
+### 19.5. The fgets() function
+
+In order to read the content of filename.txt, we can use the ```fgets()``` function.
+
+The ```fgets()``` function takes three parameters:
+
+1. The first parameter specifies where to store the file content.
+2. The second parameter specifies the maximum size of data to read, which should match the size of myString (100).
+3. The third parameter requires a file pointer that is used to read the file (fptr in our example).
+
+**Note: The fgets function only reads the first line of the file. If you remember, there were two lines of text in filename.txt.**
+
+To read every line of the file, you can use a ```while``` loop:
+```c
+FILE *fptr;
+
+// Open a file in read mode
+fptr = fopen("filename.txt", "r");
+
+// Store the content of the file
+char myString[100];
+
+// Read the content and print it
+while(fgets(myString, 100, fptr)) {
+  printf("%s", myString);
+}
+
+// Close the file
+fclose(fptr);
+```
+
+## 20. Structures (structs)
+
+Unlike an array, a structure can contain many different data types (int, float, char, etc.).
+
+```c
+struct MyStructure {   // Structure declaration
+  int myNum;           // Member (int variable)
+  char myLetter;       // Member (char variable)
+}; // End the structure with a semicolon
+fclose
+```
+
+### 20.1. Acces Structure
+
+```c
+#include <stdio.h>
+
+// Create a structure called myStructure
+struct myStructure {
+  int myNum;
+  char myLetter;
+};
+
+int main() {
+  // Create a structure variable of myStructure called s1
+  struct myStructure s1;
+
+  // Assign values to members of s1
+  s1.myNum = 13;
+  s1.myLetter = 'B';
+
+  // Print values
+  printf("My number: %d\n", s1.myNum);
+  printf("My letter: %c\n", s1.myLetter);
+
+  return 0;
+}
+```
+
+### 20.2. Strings in Structures
+
+ You can use the ```strcpy()``` function and assign the value to s1.myString, like this:
+
+ ```c
+#include <stdio.h>
+
+struct myStructure {
+  int myNum;
+  char myLetter;
+  char myString[30]; // String
+};
+
+int main() {
+  struct myStructure s1;
+
+  // Assign a value to the string using the strcpy function
+  strcpy(s1.myString, "Some text");
+
+  // Print the value
+  printf("My string: %s", s1.myString);
+
+  return 0;
+}
+```
+
+### 20.3. Simpler Syntax
+
+You can also assign values to members of a structure variable at declaration time, in a single line.
+
+Just insert the values in a comma-separated list inside curly braces ```{}```. Note that you don't have to use the ```strcpy()``` function for string values with this technique:
+
+ ```c
+#include <stdio.h>
+
+// Create a structure
+struct myStructure {
+  int myNum;
+  char myLetter;
+  char myString[30];
+};
+
+int main() {
+  // Create a structure variable and assign values to it
+  struct myStructure s1 = {13, 'B', "Some text"};
+
+  // Print values
+  printf("%d %c %s", s1.myNum, s1.myLetter, s1.myString);
+
+  return 0;
+}
+```
+
+### 20.4. Real Life Example
+
+ ```c
+#include <stdio.h>
+
+struct Car {
+  char brand[50];
+  char model[50];
+  int year;
+};
+
+int main() {
+  struct Car car1 = {"BMW", "X5", 1999};
+  struct Car car2 = {"Ford", "Mustang", 1969};
+  struct Car car3 = {"Toyota", "Corolla", 2011};
+
+  printf("%s %s %d\n", car1.brand, car1.model, car1.year);
+  printf("%s %s %d\n", car2.brand, car2.model, car2.year);
+  printf("%s %s %d\n", car3.brand, car3.model, car3.year);
+
+  return 0;
+}
+```
+
+![](/1_pick_a_language/W3S/all_C_exercises.png)
+
+## 21. Enumeration (enum)
+
+An enum is a special type that represents a group of constants (unchangeable values).
+
+```c
+enum Level {
+  LOW,
+  MEDIUM,
+  HIGH
+};
+```
+**It is not required to use uppercase, but often considered as good practice.  
+Enum is short for "enumerations", which means "specifically listed".**
+
+To access the enum, you must create a variable of it.
+
+Inside the ```main()``` method, specify the ```enum``` keyword, followed by the name of the enum (```Level```) and then the name of the enum variable (```myVar``` in this example). The assigned value must be one of the items inside the enum (```LOW```, ```MEDIUM``` or ```HIGH```):
+
+```c
+enum Level myVar = MEDIUM;
+```
+
+![](/1_pick_a_language/W3S/w3cquiz.png)
+
+---
